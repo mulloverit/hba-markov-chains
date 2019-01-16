@@ -85,8 +85,9 @@ def make_chains(text_string):
             #print((words[idx] + " " + words[idx + 1]))
             if (key_pair) ==  (words[idx], words[idx + 1]):
                 value_list.append(words[idx + 2])
-        
-    print(chains)
+                #set chains equal to the tuple and empty string
+    
+            
     return chains
 
 
@@ -96,8 +97,21 @@ def make_text(chains):
     words = []
 
     # your code goes here
+    # get any key in dict, then get one of that key's values randomly
+    # store that key/value pair into another list
+    # join that list into a string
+    # use key[1] + value as new key, and get next random value
+    # repeat until KeyError
 
-    return " ".join(words)
+    values = choice(chains.keys())
+    print(values)
+    tuples = chains.keys()
+    #text_from_chains = choice(tuples) + choice(values)
+    #print(text_from_chains)
+    # # 
+    # #chains.get
+
+    #return " ".join(words)
 
 
 input_path = "green-eggs.txt"
