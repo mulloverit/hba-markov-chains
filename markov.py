@@ -80,12 +80,13 @@ def make_chains(text_string):
 
         # need to have index of tuple occurence, take the second word's index
         # add one to that index 
-        for idx, i in enumerate(words):
+        for idx, i in enumerate(words[:-2]):
             
             #print((words[idx] + " " + words[idx + 1]))
             if (key_pair) ==  (words[idx], words[idx + 1]):
                 value_list.append(words[idx + 2])
-                print(chains)
+        
+    print(chains)
     return chains
 
 
