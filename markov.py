@@ -10,9 +10,7 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
     full_text = open(file_path).read()
-
     return full_text
 
 
@@ -40,54 +38,36 @@ def make_chains(text_string):
         >>> chains[('there','juanita')]
         [None]
     """
-
+    
+    # establish empty dict to be populated with chains from incoming corpus
     chains = {}
 
-    # your code goes here
-    # split the incoming text at spaces
-    # use a for loop to pair words into tuples - overlapping
-    # ignore last word? pair? in text block
-    # create dictionary with tuples as keys
-    # look in text block for each tuple to get the words that follow it to add 
-    # list of keys
-
+    # split corpus by whitepace, including new lines
     words = text_string.split()
 
-    for i in range(len(words) - 2):
-        # take var of tuple and shovel into dict as a key
-        
-        # alternative solution, potentially superior for readability?
-        # pair = (words[i], words[i + 1])
-        # chains[pair] = []
-        
-        chains[(words[i], words[i + 1])] = []
+    # loop over indices the length of corpus, minus two positons
+    # use -2 because the length of desired chain is 2 and positions 
+    # for terminal chain must be ignored to avoid infinite chaining
+    for idx in range(len(words) - 2):
+    
+        # while looping over corpus, take each word & it's following neighbor
+        # add the pair to chains dict as tuple & make their value an empty list
+        chains[(words[idx], words[idx + 1])] = []
 
-    # dictionary, look at the word set in our tuple and find the following word(s)
-    # in text_string and add to list each time it appears 
-    # actions:  crawling text looking for tuples
-    #           updating dict with new values in list form
-    # for each key in text_string, if it follows the tuple pair, add to list
+
+    # now that dict keys are populated with tuples,
+    # loop over all dict items to begin populating values
     for key_pair, value_list in chains.items():
         
-        # print(key_pair)
-        # print(value_list)
-
-        # look for key in text
-        # append following word to value
-
-        # in words, every time you have occurent of tuple, take +1 
-        
-
-        # need to have index of tuple occurence, take the second word's index
-        # add one to that index 
-        for idx, i in enumerate(words[:-2]):
+        # iterate over each index & word in the split list version of corpus
+        for idx, word in enumerate(words[:-2]):
             
-            #print((words[idx] + " " + words[idx + 1]))
+            # where a word & it's trailing neighbor are equal to dict key
+            # add the trailing neighbor of pair (idx + 2) to the list value of key
             if (key_pair) ==  (words[idx], words[idx + 1]):
                 value_list.append(words[idx + 2])
-                #set chains equal to the tuple and empty string
     
-            
+    # return populated dictionary             
     return chains
 
 
