@@ -11,8 +11,9 @@ def open_and_read_file(file_path):
     """
 
     # your code goes here
+    full_text = open(file_path).read()
 
-    return "Contents of your file as one long string"
+    return full_text
 
 
 def make_chains(text_string):
@@ -43,7 +44,48 @@ def make_chains(text_string):
     chains = {}
 
     # your code goes here
+    # split the incoming text at spaces
+    # use a for loop to pair words into tuples - overlapping
+    # ignore last word? pair? in text block
+    # create dictionary with tuples as keys
+    # look in text block for each tuple to get the words that follow it to add 
+    # list of keys
 
+    words = text_string.split()
+
+    for i in range(len(words) - 2):
+        # take var of tuple and shovel into dict as a key
+        
+        # alternative solution, potentially superior for readability?
+        # pair = (words[i], words[i + 1])
+        # chains[pair] = []
+        
+        chains[(words[i], words[i + 1])] = []
+
+    # dictionary, look at the word set in our tuple and find the following word(s)
+    # in text_string and add to list each time it appears 
+    # actions:  crawling text looking for tuples
+    #           updating dict with new values in list form
+    # for each key in text_string, if it follows the tuple pair, add to list
+    for key_pair, value_list in chains.items():
+        
+        # print(key_pair)
+        # print(value_list)
+
+        # look for key in text
+        # append following word to value
+
+        # in words, every time you have occurent of tuple, take +1 
+        
+
+        # need to have index of tuple occurence, take the second word's index
+        # add one to that index 
+        for idx, i in enumerate(words):
+            
+            #print((words[idx] + " " + words[idx + 1]))
+            if (key_pair) ==  (words[idx], words[idx + 1]):
+                value_list.append(words[idx + 2])
+                print(chains)
     return chains
 
 
