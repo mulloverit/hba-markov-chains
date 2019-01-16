@@ -42,7 +42,7 @@ def make_chains(text_string):
     # establish empty dict to be populated with chains from incoming corpus
     chains = {}
 
-    # split corpus by whitepace, including new lines
+    # create list of words in corpus, split by whitespace, including new lines
     words = text_string.split()
 
     # loop over indices the length of corpus, minus two positons
@@ -76,21 +76,49 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
     # get any key in dict, then get one of that key's values randomly
     # store that key/value pair into another list
     # join that list into a string
     # use key[1] + value as new key, and get next random value
     # repeat until KeyError
 
-    values = choice(chains.keys())
-    print(values)
-    tuples = chains.keys()
-    #text_from_chains = choice(tuples) + choice(values)
-    #print(text_from_chains)
-    # # 
-    # #chains.get
 
+    # create a list of all keys in chains dict
+    # and choose a random indexed key based on range of length of keys
+    random_key = list(chains.keys())[(choice(range(len(chains.keys()))))] # .keys() returns dict class obj
+    # alternative to above, split into two lines:
+    # random_key_index = (choice(range(len(chains.keys()))))
+    # random_key = list(chains.keys())[random_key_index]
+
+    # create a list of all values associated with the chosen random key
+    # and choose a random indexed value based on range of length of values
+    random_value = chains.get(random_key)[(choice(range(len(chains.get(random_key)))))] # .get() returns list
+    # alternative to above, split into two lines:
+    # random_key_values = (list(chains.get(random_key)))
+    # random_values_index = (choice(range(len(random_key_values))))
+
+    words.append(random_key[0])
+    words.append(random_key[1])
+    words.append(random_value)
+
+    try:
+        # create a new tuple to retrieve values against as next link in chain
+        new_tuple = (random_key[1], random_value)
+        
+        # create new list of values to grab based on new tuple, grab a random one based on length of new values list
+        new_value = chains.get(new_tuple)[(choice(range(len(chains.get(new_tuple)))))]
+        # alternative to above, split into two lines: 
+        # new_value_list = chains.get(new_tuple) # this returns a list
+        # new_random_value = new_value_list[(choice(range(len(new_value_list))))]
+        words.append(new_tuple[0])
+        words.append(new_tuple[1])
+        words.append(new_value)
+
+    except:
+        return words
+
+    print(words)
+    
     #return " ".join(words)
 
 
